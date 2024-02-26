@@ -125,7 +125,7 @@ router.post('/login', async (req, res) => {
     }
 })
 
-// TOKEN VERIFACATION POINT
+// TOKEN VERIFICATION POINT
 router.get('/verify', isAuthenticated, (req, res) => {
     console.log('User authenticated: ', req.payload);
     res.status(200).json(req.payload);

@@ -40,6 +40,5 @@ User.findByEmail = (email) => {
 }
 
 
-
 export default User;
 
