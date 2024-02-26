@@ -1,12 +1,10 @@
 import express from 'express';
 const router = express.Router();
-
-
 import db from '../dbService/db-service.js'
 
 import { isAuthenticated } from '../middleware/jwt.js';
 
-// Add customer
+// ADD CUSTOMER
 router.post('/user/customers', isAuthenticated, async (req, res, next) => {
     const { user_id } = req.payload;
     console.log('request body: ', req.body)
@@ -22,7 +20,6 @@ router.post('/user/customers', isAuthenticated, async (req, res, next) => {
         return res.status(400).json({ error });
     }
 
-    // verify email has correct format
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 
     if (!emailRegex.test(email)) {
@@ -50,7 +47,7 @@ router.post('/user/customers', isAuthenticated, async (req, res, next) => {
 
 })
 
-// Retrieve all customers:
+// RETRIEVE ALL CUSTOMERS
 router.get('/user/customers', isAuthenticated, async (req, res, next) => {
     const { user_id } = req.payload;
     console.log('User id: ', user_id)
@@ -62,7 +59,7 @@ router.get('/user/customers', isAuthenticated, async (req, res, next) => {
     }
 
 });
-//  Retrieve customer by id
+// RETRIEVE CUSTOMER BY ID
 router.get('/user/customers/:id', isAuthenticated, async (req, res, next) => {
     const { id } = req.params;
 
@@ -73,7 +70,7 @@ router.get('/user/customers/:id', isAuthenticated, async (req, res, next) => {
         console.log('Error retrieving customer: ', error)
     }
 });
-// Retrieve customer expenses:
+// RETRIEVE CUSTOMER PURCHASE HISTORY
 router.get('/user/customers/:id/purchases', isAuthenticated, async (req, res, next) => {
     const { id } = req.params;
 
@@ -91,7 +88,7 @@ router.get('/user/customers/:id/purchases', isAuthenticated, async (req, res, ne
 
 });
 
-// UPDATE customer by id
+// UPDATE  CUSTOMER BY ID
 router.put('/user/customers/:id', isAuthenticated, async (req, res, next) => {
     const { id } = req.params;
     const { firstName, lastName, email } = req.body;
@@ -104,8 +101,6 @@ router.put('/user/customers/:id', isAuthenticated, async (req, res, next) => {
     if (error.length > 0) {
         return res.status(400).json({ error });
     }
-
-    // verify email has correct format
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 
     if (!emailRegex.test(email)) {
@@ -126,7 +121,7 @@ router.put('/user/customers/:id', isAuthenticated, async (req, res, next) => {
 
 })
 
-// DELETE customer by id
+// DELETE CUSTOMER BY ID
 router.delete('/user/customers/:id', isAuthenticated, async (req, res, next) => {
     const { id } = req.params;
     console.log('params: ', id)
@@ -137,6 +132,5 @@ router.delete('/user/customers/:id', isAuthenticated, async (req, res, next) => 
         console.log('Error deleting customer: ', error)
     }
 })
-
 
 export default router;

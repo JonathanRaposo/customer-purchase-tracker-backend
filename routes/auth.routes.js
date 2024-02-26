@@ -7,6 +7,7 @@ const saltRounds = 10;
 
 import { isAuthenticated } from '../middleware/jwt.js';
 
+// SIGN UP ROUTE
 router.post('/signup', async (req, res) => {
     console.log('request body: ', req.body);
     const { username, email, password } = req.body;
@@ -122,12 +123,9 @@ router.post('/login', async (req, res) => {
         console.log('Error from server: ', err)
         res.status(500).json({ message: 'Internal Server Error.' })
     }
-
-
-
 })
 
-
+// TOKEN VERIFACATION POINT
 router.get('/verify', isAuthenticated, (req, res) => {
     console.log('User authenticated: ', req.payload);
     res.status(200).json(req.payload);

@@ -15,9 +15,4 @@ router.get('/', (req, res) => {
     </p>`)
 })
 
-
-
-
-
-
 export default router;

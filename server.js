@@ -1,5 +1,3 @@
-
-
 import app from './app.js';
 import { DEFAULT_PORT } from './lib/constants.js';
 
