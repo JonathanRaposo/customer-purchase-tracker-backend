@@ -38,7 +38,41 @@ User.findByEmail = (email) => {
         });
     });
 }
+User.findById = (id) => {
+    return new Promise((resolve, reject) => {
+        const sql = 'SELECT * FROM?? WHERE?? =?';
+        pool.query(sql, ['users', 'user_id', id], (error, result) => {
+            if (error) {
+                return reject(error);
+            }
+            resolve(result);
+        });
+    });
+}
 
+User.findByIdAndUpdate = (id, updatedData) => {
+    return new Promise((resolve, reject) => {
+        const sql = 'UPDATE?? SET? WHERE?? =?';
+        pool.query(sql, ['users', updatedData, 'user_id', id], (error, result) => {
+            if (error) {
+                return reject(error);
+            }
+            resolve(result);
+        });
+    });
+}
+
+User.findByIdAndDelete = (id) => {
+    return new Promise((resolve, reject) => {
+        const sql = 'DELETE FROM?? WHERE?? =?';
+        pool.query(sql, ['users', 'user_id', id], (error, result) => {
+            if (error) {
+                return reject(error);
+            }
+            resolve(result);
+        });
+    });
+}
 
 export default User;
 

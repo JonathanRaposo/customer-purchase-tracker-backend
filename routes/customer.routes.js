@@ -102,7 +102,6 @@ router.put('/user/customers/:id', isAuthenticated, async (req, res, next) => {
         return res.status(400).json({ error });
     }
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
-
     if (!emailRegex.test(email)) {
         return res.status(400).json({ message: 'Enter a valid email format' });
     }

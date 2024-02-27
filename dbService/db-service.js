@@ -71,6 +71,7 @@ db.customerPurchases = (id) => {
     })
 }
 
+
 db.updateCustomer = (id, updatedData) => {
     return new Promise((resolve, reject) => {
         const sql = `UPDATE?? SET? WHERE?? =?`
@@ -93,6 +94,18 @@ db.deleteCustomer = (id) => {
         });
     });
 
+}
+db.deleteManyCustomers = (arrayOfIds) => {
+    return new Promise((resolve, reject) => {
+        const customerIds = arrayOfIds;
+        const sql = 'DELETE FROM?? WHERE?? IN (?)';
+        pool.query(sql, ['customers', 'customer_id', customerIds], (error, result) => {
+            if (error) {
+                return reject(error);
+            }
+            resolve(result);
+        });
+    });
 }
 
 export default db;
