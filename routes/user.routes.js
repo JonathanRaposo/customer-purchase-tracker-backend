@@ -99,11 +99,9 @@ router.delete('/users/:id', isAuthenticated, async (req, res) => {
 
     try {
         if (customerIds.length > 0) {
-            console.log('IDS: ', customerIds)
             const result = await db.deleteManyCustomers(customerIds);
-            console.log('result:', result)
             if (result.affectedRows > 0) {
-                const result = await User.findByIdAndDelete(id);
+                await User.findByIdAndDelete(id);
                 res.status(200).json({ message: 'Account deleted.' });
             }
         } else {
