@@ -7,7 +7,6 @@ import { isAuthenticated } from '../middleware/jwt.js';
 // ADD CUSTOMER
 router.post('/user/customers', isAuthenticated, async (req, res, next) => {
     const { user_id } = req.payload;
-    console.log('request body: ', req.body)
 
     const { firstName, lastName, email } = req.body;
     const error = [];
@@ -123,7 +122,6 @@ router.put('/user/customers/:id', isAuthenticated, async (req, res, next) => {
 // DELETE CUSTOMER BY ID
 router.delete('/user/customers/:id', isAuthenticated, async (req, res, next) => {
     const { id } = req.params;
-    console.log('params: ', id)
     try {
         await db.deleteCustomer(id);
         res.json({ message: 'Customer id # ' + id + ' removed.' })
